@@ -48,3 +48,13 @@ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
     background-color: rgb(206, 243, 243);
 }
+
+.highlight-hover:hover {
+    border: 2px solid #000000;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.highlight-hover-light:hover {
+    border: 2px solid #ffffff;
+    transition: border-color 0.2s ease-out;
+}

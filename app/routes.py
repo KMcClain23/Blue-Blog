@@ -1,8 +1,9 @@
-from app import app
+from app import app, db
 from flask import render_template, redirect, url_for
 from flask import request
 from werkzeug.security import generate_password_hash
 from app.forms import SignUpForm
+from app.models import User
 
 
 @app.route('/')
@@ -75,6 +76,7 @@ def programming():
 @app.route('/signup', methods = ["GET", "POST"])
 def signup():
     form = SignUpForm()
+
     if form.validate_on_submit():
         # Get the data from the form
         first_name = form.first_name.data
@@ -82,6 +84,16 @@ def signup():
         username = form.username.data
         email = form.email.data
         password = form.password.data
+
+        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+        if existing_user:
+            form.username.errors.append("A user with that email/username already exists.")
+            return render_template('signup.html', form = form)
+
+        new_user = User(first_name = first_name, last_name = last_name, username = username, email = email, password = password)
+
+        db.session.add(new_user)
+        db.session.commit()
 
                 # redirect back to the home page
         return redirect(url_for('index'))
