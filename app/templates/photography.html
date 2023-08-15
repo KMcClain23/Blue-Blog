@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Photography {% endblock title %}
+
+{% block header %}
+        <h1>Photography</h1>
+{% endblock header %}
+
+{% block content %}
+<div class = "container mt-5">
+    <h3 class = "text-center pb-5">Pictures From The Web</h3>
+    <div class = "row">
+        {% for image in image_list %}
+        <div class = "col-md-4 mb-4">
+            <div class = "card img-hover">
+                <img src = "{{ image.src }}" alt = "{{ image.alt }}" class = "img-fluid">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
