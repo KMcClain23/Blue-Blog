@@ -9,22 +9,42 @@
     <h1 class = "text-center">Sign Up Here</h1>
 {% endblock header %}
 
+
+
 {% block content %}
+{{ form.csrf_token }}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="post" action="/signup" class = "mt-4">
+            <form method="post" action="/signup" class="mt-4">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name(class="form-control", placeholder="First Name") }}
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class = "form-control" placeholder = "Enter Password">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name(class="form-control", placeholder="Last Name") }}
                 </div>
-                <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email(class="form-control", placeholder="Email") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.username.label_tag }}
+                    {{ form.username(class="form-control", placeholder="Enter Username") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label_tag }}
+                    {{ form.password(class="form-control", placeholder="Enter Password") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.confirm_password.label_tag }}
+                    {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+                </div>
+                {{ form.submit(class="btn btn-dark w-100") }}
             </form>
         </div>
     </div>
 </div>
 {% endblock content %}
+
