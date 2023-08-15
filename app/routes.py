@@ -1,6 +1,6 @@
 from app import app
-from flask import render_template
-from flask import request, redirect, url_for
+from flask import render_template, redirect, url_for
+from flask import request
 from werkzeug.security import generate_password_hash
 from app.forms import SignUpForm
 
@@ -72,9 +72,20 @@ def programming():
     return render_template('programming.html', image_list = image_list)
 
 
-@app.route('/signup')
+@app.route('/signup', methods = ["GET", "POST"])
 def signup():
     form = SignUpForm()
+    if form.validate_on_submit():
+        # Get the data from the form
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+
+                # redirect back to the home page
+        return redirect(url_for('index'))
+    
     return render_template('signup.html', form = form)
 
 

@@ -1,0 +1,50 @@
+.btn-hover:hover {
+transform: translateY(-5px);
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img-hover {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-hover img {
+    transition: transform 0.2s, filter 0.5s;
+    filter: grayscale(100%);
+}
+
+.img-hover:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.logo {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    background-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 160px;
+    height: 40px;
+    transition: background-image 0.3s;
+}
+
+.logo .text {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.logo:hover {
+    background-image: url(https://res.cloudinary.com/djvpgim4w/image/upload/v1691813418/Burger_100x100_vie5bb.png);
+}
+
+.logo:hover .text {
+    opacity: 0;
+}
+
+.highlight-hover {
+    transition: background-color 0.3s ease;
+    background-color: rgb(206, 243, 243);
+}
