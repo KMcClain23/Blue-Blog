@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for
 from flask import request
 from werkzeug.security import generate_password_hash
 from app.forms import SignUpForm, PostForm
-from app.models import User
+from app.models import User, Post
 
 
 @app.route('/')
@@ -114,7 +114,11 @@ def create_post():
         title = form.title.data
         body = form.body.data
         image_url = form.image_url.data or None
-        print(title, body, image_url)
+        
+        new_post = Post(title=title, body=body, image_url=image_url, user_id=1)
+
+        db.session.add(new_post)
+        db.session.commit()
 
         return redirect(url_for('index'))
     return render_template('create_post.html', form=form)
