@@ -106,9 +106,6 @@ def signup():
                         
     return render_template('signup.html', form = form)
 
-
-
-
 @app.route('/create', methods=["GET", "POST"])
 @login_required
 def create_post():
@@ -124,7 +121,7 @@ def create_post():
         db.session.add(new_post)
         db.session.commit()
 
-        flash(f"{new_post.title} has been creaeted")
+        flash(f"{new_post.title} has been created")
         return redirect(url_for('index'))
     return render_template('create_post.html', form=form)
 

@@ -16,14 +16,14 @@
             <form method = "post" action="/login" class = "mt-4">
                 {{ form.csrf_token }}
                 <div class = "mb-3">
-                    {{ form.username.label }}
-                    {{ form.username(class='form-control', placeholder='Enter Username') }}
+                    {{ form.username.label_tag }}
+                    {{ form.username(class='form-control highlight-hover', placeholder='Enter Username') }}
                 </div>
                 <div class = "mb-3">
-                    {{ form.password.label }}
-                    {{ form.password(class='form-control', placeholder='Enter Password') }}
+                    {{ form.password.label_tag }}
+                    {{ form.password(class='form-control highlight-hover', placeholder='Enter Password') }}
                 </div>
-                <button type = "submit" class = "btn btn-dark w-100">Log In</button>
+                <button type = "submit" class = "btn btn-dark w-100 btn-hover">Log In</button>
             </form>
         </div>
     </div>
