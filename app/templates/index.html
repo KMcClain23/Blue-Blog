@@ -3,12 +3,38 @@
 {% block title %} Home {% endblock title %}
 
 {% block header %}
-        <h1>Howdy!</h1>
+    <h1>Howdy</h1>
+    {% if current_user.is_authenticated %}
+        <h4>{{ current_user.first_name }}!</h4>
+    {% else %}
         <h4>Please Sign Up or Log In to use the Blog</h4>
+    {% endif %}
 {% endblock header %}
 
 {% block content %}
-<div class="col-12">
-    <h5>Posts Go Here</h5>
-</div>
+    <div class="row">
+        {% if current_user.is_authenticated %}
+        {% for post in posts %}
+            <div class="col-6">
+                <div class="card my-3 bg-light border-0 shadow">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ post.image_url }}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                            <h5 class="card-title text-primary">{{ post.title }}</h5>
+                            <h6 class="card-subtitle mb2 text-muted">By: {{ post.author.username }}</h6>
+                            <p class="card-text">{{ post.body }}</p>
+                            <p class="card-text"><small class="text-muted">{{ post.date_created.strftime('%A %b %d, %Y at %I:%M%p')  }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}        
+    </div>
 {% endblock content %}
+
+

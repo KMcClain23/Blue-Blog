@@ -9,22 +9,27 @@
         <div class="collapse navbar-collapse p-1" id = "navbarNavAltMarkup">
             <div class="navbar-nav p-1">
                 <a class="nav-link px-3 btn-hover" href = "{{ url_for('index')}}">Home</a>
-
                 <a class="nav-link dropdown-toggle btn-hover" href = "#" id = "categoriesDropdown" role = "button" data-bs-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">Favorites</a>
                 <!-- My DropDown Items -->
                 <ul class="dropdown-menu dropdown-menu-center" aria-labelledby = "categoriesDropdown">
                     <li><a class="dropdown-item px-3" href = "{{ url_for('photography')}}">Photography</a>
-                    <li><a class="dropdown-item px-3" href = "{{ url_for('music')}}">Music</a></li>
-                    <li><a class="dropdown-item px-3" href = "{{ url_for('nature')}}">Nature</a></li>
-                    <li><a class="dropdown-item px-3" href = "{{ url_for('food')}}">Food</a></li>
-                    <li><a class="dropdown-item px-3" href = "{{ url_for('programming')}}">Programming</a></li>
-                </ul>
-                <!-- End DropDown Items -->
-                <a class="nav-link btn-hover" href="{{ url_for('create_post') }}">Create A Post</a>
+                        <li><a class="dropdown-item px-3" href = "{{ url_for('music')}}">Music</a></li>
+                        <li><a class="dropdown-item px-3" href = "{{ url_for('nature')}}">Nature</a></li>
+                        <li><a class="dropdown-item px-3" href = "{{ url_for('food')}}">Food</a></li>
+                        <li><a class="dropdown-item px-3" href = "{{ url_for('programming')}}">Programming</a></li>
+                    </ul>
+                    <!-- End DropDown Items -->
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-link btn-hover" href="{{ url_for('create_post') }}">Create A Post</a>
+            </div>
+            <div class="navbar-nav ms-auto">                
+                <a class="nav-link btn-hover" href="{{ url_for('logout') }}">Log Out</a>
+                {% else %}
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link btn-hover" href = "{{ url_for('signup')}}">Sign Up</a>
                 <a class="nav-link btn-hover" href = "{{ url_for('login')}}">Log In</a>
+                {% endif %}
             </div>
         </div>
     </div>

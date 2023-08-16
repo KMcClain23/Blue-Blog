@@ -1,9 +1,11 @@
-from app import db
+from app import db, login
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from random import randint
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -11,6 +13,7 @@ class User(db.Model):
     username = db.Column(db.String(75), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    posts = db.relationship('Post', backref='author')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -22,8 +25,12 @@ class User(db.Model):
     def check_password(self, password_guess):
         return check_password_hash(self.password, password_guess)
 
+@login.user_loader
+def load_user(user_id):
+    return db.session.get(User, user_id)
+
 def random_photo():
-    return f"https://picsum.photos/500?random={randint(1,100)}"
+    return f"https://picsum.photos/500?random={randint(1,500)}"
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,4 +42,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"<Post {self.id}|{self.title}>"
+    
+    
 

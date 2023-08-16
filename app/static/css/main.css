@@ -58,3 +58,11 @@ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid #ffffff;
     transition: border-color 0.2s ease-out;
 }
+
+.header-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02)), url('your-header-image.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0
+}

@@ -14,15 +14,16 @@
     <div class = "row justify-content-center">
         <div class = "col-md-6">
             <form method = "post" action="/login" class = "mt-4">
+                {{ form.csrf_token }}
                 <div class = "mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" placeholder = "Enter Username">
+                    {{ form.username.label }}
+                    {{ form.username(class='form-control', placeholder='Enter Username') }}
                 </div>
                 <div class = "mb-3">
-                    <label for = "password" class = "form-label">Password</label>
-                    <input type = "password" name = "password" class = "form-control" placeholder = "Enter Password">
+                    {{ form.password.label }}
+                    {{ form.password(class='form-control', placeholder='Enter Password') }}
                 </div>
-                <button type = "submit" class = "btn btn-dark w-100">Sign Up</button>
+                <button type = "submit" class = "btn btn-dark w-100">Log In</button>
             </form>
         </div>
     </div>
