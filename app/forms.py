@@ -12,14 +12,6 @@ class SignUpForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
-
-    def validate_email(self, field):
-        if User.query.filter_by(email = field.data).first():
-            raise ValidationError('Sorry. :( This Email is already taken.')
-    
-    def validate_username(self, field):
-        if User.query.filter_by(username = field.data).first():
-            raise ValidationError('Sorry. :( This Username is already taken.')
     
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired()])

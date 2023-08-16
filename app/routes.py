@@ -77,6 +77,7 @@ def programming():
 def signup():
     form = SignUpForm()
 
+    print('Hello')
     if form.validate_on_submit():
         # Get the data from the form
         first_name = form.first_name.data
@@ -84,16 +85,16 @@ def signup():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-
-        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
-        if existing_user:
-            form.username.errors.append("A user with that email/username already exists.")
-            return render_template('signup.html', form = form)
+        check_user = db.session.execute(db.select(User).where( (User.username==username) | (User.email==email) )).scalar()
+        if check_user:
+            flash('A user with that username/password already exists')
+            return redirect(url_for('signup'))
 
         new_user = User(first_name = first_name, last_name = last_name, username = username, email = email, password = password)
 
         db.session.add(new_user)
         db.session.commit()
+        flash(f'{new_user.username} has been created')
 
         login_user(new_user)      
 
@@ -120,12 +121,14 @@ def create_post():
         db.session.add(new_post)
         db.session.commit()
 
+        flash(f"{new_post.title} has been creaeted")
         return redirect(url_for('index'))
     return render_template('create_post.html', form=form)
 
 @app.route('/logout')
 def logout():
     logout_user()
+    flash("You have successfully logged out")
     return redirect(url_for('index'))
 
 @app.route('/login', methods=["GET", "POST"])
@@ -137,6 +140,10 @@ def login():
         user = db.session.execute(db.select(User).where(User.username==username)).scalar()
         if user is not None and user.check_password(password):
             login_user(user)
+            flash("You have successfully logged in")
             return redirect(url_for('index'))
+        else:
+            flash('Invalid username and/or password')
+            return redirect(url_for('login'))
 
     return render_template('login.html', form = form)
