@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Create A Post {% endblock title %}
+
+{% block header %}
+    <h1>Create A New Post</h1>
+{% endblock header %}
+
+{% block content %}
+    <div class = "container">
+        <div class = "row justify-content-center">
+            <div class = "col-md-6">
+                <form action = "" method = "post" class = "mt-4">
+                    {{ form.csrf_token }}
+                    <div class = "mb-3">
+                        {{ form.title.label_tag }}
+                        {{ form.title(class="form-control highlight-hover", placeholder="Enter Post Title") }}
+                    </div>
+                    <div class = "mb-3">
+                        {{ form.body.label_tag }}
+                        {{ form.body(class="form-control highlight-hover", placeholder="Enter Post Body") }}
+                    </div>
+                    <div class = "mb-3">
+                        {{ form.image_url.label_tag }}
+                        {{ form.image_url(class="form-control highlight-hover", placeholder="Enter Image URL") }}
+                    </div>
+                    {{ form.submit(class="btn btn-dark w-100 highlight-hover-light") }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -2,7 +2,7 @@ from app import app, db
 from flask import render_template, redirect, url_for
 from flask import request
 from werkzeug.security import generate_password_hash
-from app.forms import SignUpForm
+from app.forms import SignUpForm, PostForm
 from app.models import User
 
 
@@ -106,7 +106,17 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/create', methods=["GET", "POST"])
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        # Get the data from the form
+        title = form.title.data
+        body = form.body.data
+        image_url = form.image_url.data or None
+        print(title, body, image_url)
 
-
+        return redirect(url_for('index'))
+    return render_template('create_post.html', form=form)
 
 

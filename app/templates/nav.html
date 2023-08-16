@@ -9,11 +9,15 @@
         <div class="collapse navbar-collapse p-1" id = "navbarNavAltMarkup">
             <div class="navbar-nav p-1">
                 <a class="nav-link px-3" href = "{{ url_for('index')}}">Home</a>
-                <a class="nav-link px-3" href = "{{ url_for('photography')}}">Photography</a>
-                <a class="nav-link px-3" href = "{{ url_for('music')}}">Music</a>
-                <a class="nav-link px-3" href = "{{ url_for('nature')}}">Nature</a>
-                <a class="nav-link px-3" href = "{{ url_for('food')}}">Food</a>
-                <a class="nav-link px-3" href = "{{ url_for('programming')}}">Programming</a>
+                <a class="nav-link dropdown-toggle" href = "#" id = "categoriesDropdown" role = "button" data-bs-toggle = "dropdown" aria-expand = "false">Favorite Stuff</a>
+                <ul class="dropdown-menu" aria-labelledby = "categoriesDropdown">
+                    <li><a class="nav-link px-3 dropdown-item" href = "{{ url_for('photography')}}">Photography</a>
+                    <li><a class="nav-link px-3 dropdown-item" href = "{{ url_for('music')}}">Music</a></li>
+                    <li><a class="nav-link px-3 dropdown-item" href = "{{ url_for('nature')}}">Nature</a></li>
+                    <li><a class="nav-link px-3 dropdown-item" href = "{{ url_for('food')}}">Food</a></li>
+                    <li><a class="nav-link px-3 dropdown-item" href = "{{ url_for('programming')}}">Programming</a></li>
+                </ul>
+                <a class="nav-link" href="{{ url_for('create_post') }}">Create A Post</a>
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href = "{{ url_for('signup')}}">Sign Up</a>

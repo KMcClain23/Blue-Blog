@@ -21,3 +21,18 @@ class User(db.Model):
     
     def check_password(self, password_guess):
         return check_password_hash(self.password, password_guess)
+
+def random_photo():
+    return f"https://picsum.photos/500?random={randint(1,100)}"
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), nullable=False)
+    body = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String, nullable=False, default=random_photo)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f"<Post {self.id}|{self.title}>"
+
