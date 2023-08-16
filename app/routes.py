@@ -100,7 +100,10 @@ def signup():
 
                 # redirect back to the home page
         return redirect(url_for('index'))
-    
+    elif form.is_submitted():
+        flash("Your passwords do not match")
+        return redirect(url_for('signup'))
+                        
     return render_template('signup.html', form = form)
 
 
