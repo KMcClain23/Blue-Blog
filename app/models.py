@@ -43,6 +43,16 @@ class User(db.Model, UserMixin):
         self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
         db.session.commit()
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'username': self.username,
+            'author': self.author.to.dict()
+        }
+
 @login.user_loader
 def load_user(user_id):
     return db.session.get(User, user_id)
