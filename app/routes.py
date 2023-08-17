@@ -76,8 +76,6 @@ def programming():
 @app.route('/signup', methods = ["GET", "POST"])
 def signup():
     form = SignUpForm()
-
-    print('Hello')
     if form.validate_on_submit():
         # Get the data from the form
         first_name = form.first_name.data

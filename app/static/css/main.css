@@ -66,3 +66,17 @@ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
     padding: 100px 0
 }
+
+.custom-alert {
+    padding: 10px 20px;
+    font-size: 16px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.custom-alert-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
+}
