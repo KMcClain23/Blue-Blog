@@ -95,3 +95,10 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return {'success': f"{post.title} has been deleted"}
+
+@api.route('/users/me')
+@token_auth.login_required
+def get_me():
+    me = token_auth.current_user()
+    return me.to_dict()
+
